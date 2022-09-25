@@ -106,9 +106,10 @@ if(user.images.length>1){
     let {username,Likedusername}=req.body
     let checkduplicates=  await likesSchema.find({from:username})
     let duplicates=checkduplicates.filter(x=>x.to===Likedusername)
-   
+  
     
-    if(!duplicates){
+    if(duplicates.length===0){
+      
       const Like = new likesSchema({
     from:username,
     to:Likedusername,
@@ -119,7 +120,7 @@ if(user.images.length>1){
      return response(res, "Sucessfuly liked", false );
     }
     
-      return response(res, "Sucessfuly liked", false )
+      return response(res, "Already liked", false)
                
   },
   filteredData: async (req, res) => {

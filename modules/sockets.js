@@ -21,11 +21,12 @@ socket.on("login", username => {
             const userslikes = await likesSchema.find({from:username})
             const usersliked=await likesSchema.find({to:username})
 
-
+                console.log(usersliked.length,userslikes.length)
 
 
             socket.emit("likes",usersliked)
             socket.emit("liked",userslikes)
+            
         })
 
 //         socket.on("login", user => {
